@@ -1,0 +1,97 @@
+{% load static %}
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home - NZ At a Glance</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% load static %}
+        <link rel="stylesheet" id="ample-style-css" href="{% static 'style.css' %}" type="text/css" media="all">
+        <header>
+            <div class="header">
+                <div class="main-head-wrap inner-wrap clearfix">
+                    <div id="header-logo-image">
+                      <img src="{% static 'images/logo.png' %}" alt="NZ At a Glance">
+                    </div>
+                    <div id="header-text" class="">
+                        <h1 id="site-title">
+                            <a href="/" title="NZ At a Glance" rel="home">NZ At a Glance</a>
+                        </h1>
+                        <p>We provide the list of the best New Zealand tours</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </head>
+    <body class="wide">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                {% block sidebar %}
+                <ul class="sidebar-nav">
+                  <br><br><br>
+                  <li><a href="{% url 'home' %}">Home</a></li>
+                  <li><a href="{% url 'tours' %}">All tours</a></li>
+                  <li><a href="{% url 'agents' %}">Agents</a></li>
+                  <li><a href="{% url 'about' %}">About</a></li>
+                  {% if user.is_authenticated %}
+                  <li>
+                    {% load custom_tag %}
+                    {% is_agent user.get_username %}
+                  </li>
+                  <br><br><br>
+                  <br><br><br>
+                  <br><br><br>
+                  <br><br><br>
+                  <br><br><br>
+                  <li>User: {{ user.get_username }}</li>
+                  <li><a href="{% url 'logout' %}?next={{request.path}}">Logout</a></li>
+                  {% else %}
+                  <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
+                  {% endif %}
+                </ul>
+                {% endblock %}
+            </div>
+
+        <div id="page" class="hfeed site">
+
+            <div class="main-wrapper">
+                <div class="single-page clearfix">
+                    <div class="inner-wrap">
+                        <hr>
+                        <div>
+                          {% block content %}
+                          {% endblock %}
+                          {% block pagination %}
+                            {% if is_paginated %}
+                              <div class="pagination">
+                                <span class="page-links">
+                                  {% if page_obj.has_previous %}
+                                    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                                  {% endif %}
+                                  <span class="page-current">
+                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                  </span>
+                                  {% if page_obj.has_next %}
+                                    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                                  {% endif %}
+                                </span>
+                              </div>
+                            {% endif %}
+                          {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer id="colophon">
+                <div class="inner-wrap">
+                    NZ At a Glance is a fictitious brand created by Computer Power Plus, solely for the purpose of training. All products and people associated with NZ At a Glance are also fictitious. Any resemblance to real brands, products, or people is purely coincidental.
+                </div>
+            </footer>
+        </div>
+      </div>
+    </div>
+    </body>
+</html>

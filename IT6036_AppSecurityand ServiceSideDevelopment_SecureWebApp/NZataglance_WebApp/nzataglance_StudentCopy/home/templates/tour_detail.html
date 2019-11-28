@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+  <h3>{{tour.name|capfirst}} </h3>
+  <p><b>Provider:</b> {{ tour.provider}} </p>
+  <p><b>Duration:</b> {{ tour.duration}} </p>
+  <p><b>Description:</b> {{ tour.description}} </p>
+  <p><b>Available:</b> {{ tour.available}} </p>
+</div>
+{% endblock %}

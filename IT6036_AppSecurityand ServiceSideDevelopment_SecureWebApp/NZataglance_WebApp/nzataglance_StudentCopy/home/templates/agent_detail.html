@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+  <h1> {{agent.last_name|capfirst}} {{agent.first_name|capfirst}} </h1>
+  <br><br>
+  <p><b>User Name:</b> {{ agent.agent_username}} </p>
+  <p><b>Email:</b> {{ agent.email_address}} </p>
+  <p><b>Phone:</b> {{ agent.phone_number}} </p>
+  <p><b>Provider:</b> {{ agent.provider}} </p>
+  <br>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Agents</h1>
+    <br><br>
+    {% if agent_list %}
+    <ul>
+
+      {% for agent in agent_list %}
+      <div class="agentname">
+        <a href="{% url 'agent_detail' agent.id %}">
+          <p><strong>{{agent.last_name|capfirst}} {{agent.first_name|capfirst}}</strong> - {{agent.provider}} </p>
+        </a>      
+      </div>
+      {% endfor %}
+      <br>
+    </ul>
+    {% else %}
+      <p>There are no agents to display.</p>
+    {% endif %}
+{% endblock %}

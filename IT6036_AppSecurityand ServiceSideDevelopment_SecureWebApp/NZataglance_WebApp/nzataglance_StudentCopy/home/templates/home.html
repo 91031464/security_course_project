@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Home Page</h1>
+<p>You are on the home page of a very basic tourism website that lists tours around new zealand provided by various tour agents. You can also find agents information and contact agents directly in case you require tour customization or would like to book in a large tour group.</p>
+<div>
+  <br><br>
+  {% if user.is_authenticated %}
+  <h3>Tours we have:</h3>
+  {% for tour in tours %}
+    <div class="tourname">
+      <a href="{% url 'tour_detail' tour.id %}">
+        <p><strong>{{ tour.tour_name|capfirst }} </strong></p>
+      </a>
+   </div>
+  {% endfor %}
+  {% endif %}
+  <br><br>
+  <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+</div>
+{% endblock %}

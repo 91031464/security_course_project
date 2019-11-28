@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>List of Tours</h1>
+    <br><br>
+    {% if tour_list %}
+    <ul>
+      {% for tour in tour_list %}
+      <div class="tourname">
+        <a href="{% url 'tour_detail' tour.id %}">
+          <p><strong>{{ tour.tour_name|capfirst }}</strong> - {{tour.duration}}</strong></p>
+        </a>
+     </div>
+      {% endfor %}
+      <br>
+    </ul>
+    {% else %}
+      <p>There are no tours to display.</p>
+    {% endif %}
+{% endblock %}

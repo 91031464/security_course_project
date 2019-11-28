@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Tours_By_agent</h1>
+    <br><br>
+    <ul>
+        {% for tour in tours_agent %}
+            <div class="tourname">
+                <p><strong>{{ tour }} </strong></p>
+            </div>
+            <br>
+        {% endfor %}
+    </ul>
+{% endblock %}
